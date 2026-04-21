@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap');
 
 :root {
   /* Parakeet Health Color Palette */
@@ -11,14 +11,14 @@
   --pk-accent-coral: #E8734A; /* Vibrant coral orange */
   --pk-accent-coral-glow: rgba(232, 115, 74, 0.2);
   --pk-blue-glow: rgba(66, 133, 244, 0.15);
-  --pk-text-main: #1A332C;
+  --pk-text-main: #28030F; /* Matched from Heidi inspector */
   --pk-text-muted: #4A635B;
   --pk-white: #FFFFFF;
   --pk-divider: rgba(26, 51, 44, 0.1);
 
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
 
   /* Spacing */
   --section-padding: 100px;
@@ -285,8 +285,10 @@ ul {
 
 /* Hero Section */
 .hero {
-  padding: 80px 24px 60px;
+  padding: 60px 24px 60px;
   background-color: var(--pk-bg-light);
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-container {
@@ -322,35 +324,36 @@ ul {
 }
 
 .hero-title {
-  font-size: clamp(2rem, 3.8vw, 2.85rem);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 4vw, 3rem); /* 3rem = 48px exactly on desktop */
+  font-weight: 400; /* Matched from inspector */
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   margin-bottom: 6px;
   color: var(--pk-text-main);
 }
 
 .hero-title em {
   font-style: italic;
-  font-family: var(--font-serif);
   font-weight: 400;
-  color: var(--pk-text-muted);
+  color: var(--pk-text-main);
 }
 
 /* Rotating Hero Line — same scale as the title */
 .hero-rotating-line {
-  margin-bottom: 36px;
+  margin-top: 4px;
+  margin-bottom: 28px;
 }
 
 .rotating-text {
   display: inline-block;
-  font-size: clamp(2rem, 3.8vw, 2.85rem);
   font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 4vw, 3rem); /* Match the 48px scale */
   font-style: italic;
   font-weight: 400;
   color: var(--pk-accent-coral);
-  line-height: 1.12;
-  letter-spacing: -0.02em;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
   will-change: transform, opacity;
   transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -418,7 +421,8 @@ ul {
   background: var(--pk-white);
   padding: 16px;
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
+  /* Contained shadow — no horizontal bleed */
+  box-shadow: 0 16px 40px -8px rgba(26, 51, 44, 0.10), 0 4px 12px -4px rgba(26, 51, 44, 0.06);
   height: 540px;
 }
 
@@ -638,11 +642,13 @@ ul {
   opacity: 0.6;
 }
 
-/* Sections Global */
+/* Sections Global (Heading 1) */
 .section-headline {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 2.25rem); /* Matches Heidi 36px (Heading 1) */
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
   margin-bottom: 20px;
 }
 
@@ -650,6 +656,8 @@ ul {
   font-size: 1.125rem;
   color: var(--pk-text-muted);
   max-width: 600px;
+  line-height: 1.5;
+  letter-spacing: -0.02em; /* Heidi Body Tracking */
 }
 
 /* Comp Hero */
@@ -664,7 +672,7 @@ ul {
   margin: 0 auto;
   color: rgba(255,255,255,0.8);
 }
-.comp-hero .accent-text { color: var(--pk-accent-coral); }
+.comp-hero .accent-text { color: inherit; } /* Keep color uniform, style gives contrast */
 
 /* Feature Sections */
 .feature-section {
@@ -688,18 +696,31 @@ ul {
   }
 }
 
+/* Feature Sections (Heading 2) */
 .feature-title {
-  font-size: clamp(2rem, 3.5vw, 2.5rem);
-  font-weight: 700;
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 1.75rem); /* Matches Heidi 28px (Heading 2) */
+  font-weight: 400;
   margin-bottom: 24px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+/* Make accent text within heading follow the light italic pattern */
+.section-headline .accent-text,
+.feature-title .accent-text,
+.cta-title .accent-text {
+  font-weight: 400;
+  font-style: italic;
+  color: inherit;
 }
 
 .feature-desc {
   font-size: 1.125rem;
   color: var(--pk-text-muted);
   margin-bottom: 32px;
-  line-height: 1.6;
+  line-height: 1.5; /* Heidi leading 150% */
+  letter-spacing: -0.02em; /* Heidi tracking -2 */
 }
 
 .feature-list {
@@ -1035,8 +1056,9 @@ ul {
   border: 1px solid var(--pk-divider);
 }
 
-.step-title { font-size: 1.75rem; font-weight: 700; margin-bottom: 12px; }
-.step-desc { color: var(--pk-text-muted); line-height: 1.6; }
+/* Step Cards (Heading 3) */
+.step-title { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; margin-bottom: 12px; line-height: 1.1; letter-spacing: -0.01em; } /* Matches Heidi 24px (Heading 3) */
+.step-desc { color: var(--pk-text-muted); line-height: 1.5; letter-spacing: -0.02em; } /* Heidi Body */
 
 /* Step 1 Visual */
 .step-mic-container { margin-bottom: 20px; text-align: center; }
@@ -1135,7 +1157,7 @@ ul {
 .cta-bg-waves { position: absolute; top:0; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none;}
 .cta-content { position: relative; z-index: 10; max-width: 600px; margin: 0 auto; }
 
-.cta-title { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 16px; letter-spacing: -0.03em;}
+.cta-title { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 3rem); font-weight: 400; margin-bottom: 16px; letter-spacing: -0.01em; line-height: 1.1; }
 .cta-subtitle { font-size: 1.25rem; color: var(--pk-text-muted); margin-bottom: 40px; }
 
 .btn-cta-white {
@@ -1215,3 +1237,368 @@ ul {
 .footer-bottom-cols {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; min-width: 50%;
 }
+
+/* ═══════════════════════════════════════════════════════
+   HERO TILES — InnovateHealth Clinic Ops Visual System
+   ═══════════════════════════════════════════════════════ */
+
+/* Tile: Call Answered — Waveform */
+.waveform-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.wave-bar {
+  display: block;
+  width: 8px;
+  border-radius: 4px;
+  background-color: rgba(26, 51, 44, 0.18);
+  animation: waveBreath 2.4s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.2s);
+}
+
+.wave-bar:nth-child(1) { height: 28px; }
+.wave-bar:nth-child(2) { height: 48px; }
+.wave-bar:nth-child(3) { height: 22px; }
+.wave-bar:nth-child(4) { height: 55px; }
+.wave-bar:nth-child(5) { height: 32px; }
+.wave-bar:nth-child(6) { height: 42px; }
+.wave-bar:nth-child(7) { height: 18px; }
+
+@keyframes waveBreath {
+  0%, 100% { transform: scaleY(0.55); opacity: 0.45; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+/* Tile: Callback Queued */
+.callback-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  flex: 1;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.callback-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(26, 51, 44, 0.06);
+}
+
+.callback-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.callback-time {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--pk-text-main);
+  opacity: 0;
+  animation: fadeSlideUp 0.6s ease forwards;
+  animation-delay: 1.2s;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tile: Call in Progress (center coral card) */
+.call-status-display {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex: 1;
+  width: 100%;
+}
+
+.call-status-icon {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.call-pulse-dot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 14px;
+  height: 14px;
+  background-color: #4ADE80;
+  border-radius: 50%;
+  border: 2.5px solid rgba(255, 255, 255, 0.85);
+  animation: callPulse 2s ease-in-out infinite;
+}
+
+@keyframes callPulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.call-status-text {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  letter-spacing: 0.01em;
+}
+
+/* Tile: Appointment Booked */
+.booking-content {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+  justify-content: center;
+  width: 100%;
+}
+
+.date-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(26, 51, 44, 0.05);
+  border-radius: 12px;
+  padding: 10px 20px;
+  border: 1px solid rgba(26, 51, 44, 0.07);
+}
+
+.date-day {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pk-text-muted);
+  line-height: 1.2;
+}
+
+.date-num {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--pk-text-main);
+  line-height: 1;
+}
+
+.booking-check {
+  width: 38px;
+  height: 38px;
+  background: var(--pk-sage-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: checkAppear 0.45s ease forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes checkAppear {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Tile: Reminder Sent */
+.reminder-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.reminder-bubble {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(26, 51, 44, 0.04);
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(26, 51, 44, 0.06);
+  opacity: 0;
+  animation: fadeSlideUp 0.5s ease forwards;
+  animation-delay: 0.8s;
+}
+
+.reminder-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--pk-text-muted);
+}
+
+/* Tile: Running */
+.running-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex: 1;
+  width: 100%;
+}
+
+.running-label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: -0.01em;
+}
+
+.running-pulse-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #4ADE80;
+  border-radius: 50%;
+  animation: runPulse 3s ease-in-out infinite;
+}
+
+@keyframes runPulse {
+  0%, 100% { opacity: 0.35; box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+  50% { opacity: 1; box-shadow: 0 0 14px 5px rgba(74, 222, 128, 0.3); }
+}
+
+/* ─── Responsive adjustments for hero tiles ─── */
+@media (max-width: 768px) {
+  .wave-bar { width: 5px; }
+  .wave-bar:nth-child(1) { height: 18px; }
+  .wave-bar:nth-child(2) { height: 32px; }
+  .wave-bar:nth-child(3) { height: 15px; }
+  .wave-bar:nth-child(4) { height: 36px; }
+  .wave-bar:nth-child(5) { height: 22px; }
+  .wave-bar:nth-child(6) { height: 28px; }
+  .wave-bar:nth-child(7) { height: 12px; }
+  .waveform-visual { gap: 4px; }
+
+  .call-status-icon { width: 48px; height: 48px; }
+  .call-status-icon svg { width: 22px; height: 22px; }
+  .call-status-text { font-size: 0.7rem; }
+  .call-pulse-dot { width: 10px; height: 10px; top: 2px; right: 2px; }
+
+  .running-label { font-size: 1.1rem; }
+  .date-num { font-size: 1.2rem; }
+  .date-block { padding: 8px 14px; }
+
+  .callback-time { font-size: 0.7rem; }
+  .callback-icon { width: 36px; height: 36px; }
+  .callback-icon svg { width: 18px; height: 18px; }
+
+  .reminder-text { font-size: 0.65rem; }
+  .reminder-bubble { padding: 10px 12px; gap: 8px; }
+  .reminder-bubble svg { width: 14px; height: 14px; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   HERO ATMOSPHERE — Continuous rightward flow bands
+   Broad filled shapes that drift continuously to the
+   right, creating layered parallax depth behind
+   the hero. Each track contains two identical SVGs
+   for seamless looping.
+   ═══════════════════════════════════════════════════════ */
+
+.hero-atmosphere {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 20vh; /* Constrained — waves stay in lower edge only */
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  /* Fade the top edge so waves don't hard-start mid-hero */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 35%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 35%);
+}
+
+.atmos-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 200%;
+  height: 100%;
+}
+
+.atmos-band {
+  width: 50%;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+/* Band 1: Back — Sage/Mint Green */
+.atmos-track-1 {
+  opacity: 0.18;
+  animation: atmosFlowRight 80s linear infinite;
+}
+
+/* Band 2: Middle — Warm Coral/Blush */
+.atmos-track-2 {
+  opacity: 0.13;
+  animation: atmosFlowRight 55s linear infinite;
+}
+
+/* Band 3: Front — Dark Green */
+.atmos-track-3 {
+  opacity: 0.09;
+  animation: atmosFlowRight 100s linear infinite;
+}
+
+@keyframes atmosFlowRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* Ensure hero content sits above the atmosphere */
+.hero-container {
+  position: relative;
+  z-index: 10;
+}
+
+/* ─── Hero Sub-note (Sub heading scale) ─── */
+.hero-subnote {
+  margin-top: 24px;
+  margin-bottom: 32px;
+  max-width: 460px;
+  font-size: 1.125rem;
+  line-height: 1.5; /* Heidi 150% leading */
+  color: var(--pk-text-muted);
+  font-weight: 400;
+  letter-spacing: -0.02em; /* Heidi tracking */
+}
+
+/* Atmosphere + Sub-note responsive */
+@media (max-width: 768px) {
+  .hero-atmosphere {
+    height: 65%;
+  }
+  .hero-subnote {
+    margin-top: 20px;
+    margin-bottom: 24px;
+    max-width: 380px;
+    font-size: 1.05rem;
+  }
+}
+
